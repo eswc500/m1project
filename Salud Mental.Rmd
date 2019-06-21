@@ -1,0 +1,136 @@
+
+# Analisis sobre data de Salud Mental en MAMIS (Módulos de Atención al Maltrato Infantil)
+
+## Integrantes
+> Camacho Vega Bruno Aarón
+
+> Waku Campos Edson Satoshi
+
+
+##Librerias
+```{r}
+library("sqldf")
+library(dplyr)
+library(basefun)
+library(base)
+library(fun)
+library(tidyverse)
+```
+
+## Leer dataset
+```{r}
+
+dataset<-read.csv("../Proyecto-Mainframe/DAT SALUD MENTAL - MAMIS.csv")
+
+```
+
+## Pre-procesamiento
+
+```{r}
+dt<-c("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre",
+"Octubre","Noviembre","Diciembre")
+
+writeLines(dt,"../Proyecto-Mainframe/meses.csv")
+meses<-read.csv("../Proyecto-Mainframe/meses.csv",header = F,sep = ",",col.names = c("Mes"))
+
+NroMes<-1:NROW(meses)
+meses<-cbind(NroMes,meses)
+
+dataset<-merge(meses,dataset,by="NroMes")
+dataset<-dataset[,-1]
+```
+
+## Consultas
+
+### 1) Mostrar todos los distritos donde se registran casos de abuso psicologico 
+
+```{r}
+sqldf("Select distinct Distrito from dataset where Diagnostico='ABUSO PSICOLOGICO' order by Distrito")
+```
+
+### 2) Mostrar todos los casos donde se registran diagnostico de abuso fisico y negligencia
+
+```{r}
+dplyr::select(dataset,c("Departamento","Provincia","Distrito","Sexo","Etapa","Atendidos","Atenciones"))%>%dplyr::filter(dataset$Diagnostico=="ABUSO FISICO" | dataset$Diagnostico=="NEGLIGENCIA")
+```
+### 3) Mostrar todos los casos donde se registran diagnostico de abuso psicologico a mujeres
+
+```{r}
+dplyr::select(dataset,c("Departamento","Provincia","Distrito","Sexo","Etapa","Atendidos","Atenciones"))%>%dplyr::filter(dataset$Diagnostico=="ABUSO PSICOLOGICO" & dataset$Sexo=="F")
+```
+
+### 4) Mostrar todos los casos donde el número de atenciones superar el 3
+
+```{r}
+dplyr::select(dataset,c("Departamento","Provincia","Distrito","Sexo","Etapa","Atendidos","Atenciones"))%>%dplyr::filter(dataset$Atenciones>3)
+```
+
+### 5) Mostrar el número total de personas atendidas
+
+```{r}
+sqldf("Select SUM(Atendidos)as NroAtendidos from dataset")
+```
+
+### 6) Mostrar el número total de personas registrados por diagnostico de abuso psicologico
+
+```{r}
+sqldf("Select SUM(Atenciones)as NroAtenciones from dataset where Diagnostico=='ABUSO PSICOLOGICO'")
+```
+
+
+### 7) Mostrar el número total de atenciones registradas durante cada mes
+
+```{r}
+consulta7<-function(mes){
+  consulta<-fn$sqldf("Select SUM(Atenciones)as NroAtenciones from dataset where Mes='$mes'")
+  data<-data.frame(consulta)
+  data<-head(data,100)
+  return(data)
+}
+consulta7("Enero")
+```
+
+
+### 8) Mostrar el número total de atenciones registrados por cada diagnostico
+
+```{r}
+consulta8<-function(diagnostico){
+  consulta<-fn$sqldf("Select SUM(Atenciones)as NroAtenciones from dataset where Diagnostico='$diagnostico'")
+  data<-data.frame(consulta)
+  data<-head(data,100)
+  return(data)
+}
+consulta8("ABUSO FISICO")
+```
+
+### 9) Mostrar el numero de atenciones maximos realizadas por cada mes
+
+```{r}
+consulta9<-function(mes){
+  consulta<-fn$sqldf("Select MAX(Atenciones)as Promedio from dataset where Mes == '$mes'")
+  data<-data.frame(consulta)
+  data<-head(data,100)
+  return(data)
+}
+consulta9("Junio")
+```
+
+### 10) Mostrar el numero de atenciones realizadas por distrito y diagnostico
+
+```{r}
+consulta10<-function(distrito, diagnostico){
+  consulta<-dataset%>%dplyr::filter(dataset$Distrito==distrito & dataset$Diagnostico==diagnostico)%>%dplyr::summarise(sum(Atenciones))
+  data<-data.frame(consulta)
+  data<-head(data,100)
+  return(data)
+}
+consulta10("SICUANI","ABUSO PSICOLOGICO")
+```
+
+
+
+
+
+
+
+
