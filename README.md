@@ -2,8 +2,8 @@
 ![Dashboard](https://noticiasinsn.files.wordpress.com/2013/04/dsc_0269.jpg)
 ### Descripción del Proyecto
 #### Realidad Problemática
-> 
-#### Propuesta Tecnológica
+> En el Perú, cada año van aumentando los casos de niños (as) y adolescentes víctimas de la violencia. Los casos de **maltrato infantil** han sido puestos a cargo (cobertura,seguimiento y servicios relacionados) a los módulos del MINSA llamados **MAMIS** (Módulos de Atención al Maltrato Infantil y del Adolescente en Salud). Muchos de los registros han sido detectados por estos modulos, mas no se ha llevado un analisis para la mejora continua sobre esta problematica. Por lo que es de vital importancia, el conocimiento de estos factores.
+### Propuesta Tecnológica
 > Análisis de probabilidad mediante el uso de redes Bayesianas.
 #### Breve Descripción del Proyecto
 > Mediante el uso de redes Bayesianas se determinará la probabilidad, de los niños (as) y adolescentes víctimas de la violencia , con respecto a su edad, diagnostico y geolocalización . Además tambien se podra mapear la resolución de estos casos en cuanto a respuesta y cobertura a favor de la atención especializada e integral . 
