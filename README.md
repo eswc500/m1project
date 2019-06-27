@@ -1,4 +1,4 @@
-## Analisis de mercado (Adventures Works)
+## Pronóstico de demanda de productos (Adventures Works)
 ![Dashboard](https://cdn-images-1.medium.com/max/2400/1*qoR3gf6eVVAPxyrpiQwgZA.jpeg)
 ### Descripción del Proyecto
 #### Realidad Problemática
