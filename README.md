@@ -1,5 +1,5 @@
 ## Pronóstico de demanda de productos (Adventures Works)
-![Dashboard](https://cdn-images-1.medium.com/max/2400/1*qoR3gf6eVVAPxyrpiQwgZA.jpeg)
+![Dashboard](http://www.lawcycles.co.uk/wp-content/uploads/2011/10/DSC01895-Edit.jpg)
 ### Descripción del Proyecto
 #### Realidad Problemática
 > La empresa Adventure Works Cycles,es una empresa ficticia en la que se basan las bases de datos de ejemplo AdventureWorks, es una gran empresa de fabricación multinacional. La empresa fabrica y vende bicicletas de metal y de metal compuesto en los mercados de Norteamérica, Europa y Asia. 
